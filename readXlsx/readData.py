@@ -1,7 +1,7 @@
 import openpyxl
 from tabulate import tabulate
 
-ruta = "readXlsx\pruebasubirArchivos.xlsx"
+
 
 def readData(ruta):
 
@@ -53,5 +53,5 @@ def readData(ruta):
      
      
      
-readData(ruta)
+
      
