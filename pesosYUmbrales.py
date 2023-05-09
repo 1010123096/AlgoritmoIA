@@ -2,16 +2,18 @@ import numpy as np
 import openpyxl
 
 def guardarPesos(matriz,nombre):
+  matriz= matriz.tolist()
   workbook = openpyxl.Workbook()
   sheet = workbook.active
   for row in matriz:
     sheet.append(row)
   workbook.save("archivosExcelGuardados/"+nombre+'.xlsx')
   
-def guardarUmbrales(x,nombre):
+def guardarUmbrales(matriz,nombre):
+  matriz=matriz.tolist()
   workbook = openpyxl.Workbook()
   sheet = workbook.active 
-  sheet.append(x)
+  sheet.append(matriz)
   workbook.save("archivosExcelGuardados/"+nombre+'.xlsx')
   
 
@@ -31,12 +33,10 @@ print("Matriz De peso")
 
 entradas = int(input("Entradas: \n"))
 salidas = int(input("Salidas: \n"))
-mp=matrizPesos(entradas, salidas)
-matrizp=mp.tolist()
+matrizp=matrizPesos(entradas, salidas)
 print(matrizp)
 print("Matriz De umbrales")
-mu =matrizUmbrales(salidas)
-matrizu=mu.tolist()
+matrizu =matrizUmbrales(salidas)
 print(matrizu)
 guardarPesos(matrizp,"pesos")
 guardarUmbrales(matrizu,"Umbrales")

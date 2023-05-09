@@ -12,8 +12,9 @@ def readData(ruta):
 
     print(dataframe)
 
-    encabezado = []
-    data = []
+    _rows = []
+    dataEntraces = []
+    dataExit = []
 
     # se definen las variables de entradas y salidas de la matriz
     entradas = 0
@@ -34,8 +35,24 @@ def readData(ruta):
     # recorre las filas para contar los patrones
     for row in range(1, dataframe.max_row):
         patrones += 1
+# Recorre el archivo sacando las entradas correspondientes y las almacena por patrones de entrada
+    for col in dataframe.iter_cols(1, entradas):
+        for row in range(1, dataframe.max_row):
+            _rows.append(col[row].value)
+            longitudDeRows = len(_rows)
+            if longitudDeRows == patrones:
+                dataEntraces.append(_rows)
+                _rows = []
+# Recorre el archivo sacando las salidas correspondientes y las almacena por patrones de salida
+    for col in dataframe.iter_cols(entradas+1, dataframe.max_column):
+        for row in range(1, dataframe.max_row):
+            _rows.append(col[row].value)
+            longitudDeRows = len(_rows)
+            if longitudDeRows == patrones:
+                dataExit.append(_rows)
+                _rows = []
 
-    return entradas, salidas, patrones
+    return entradas, salidas, patrones, dataEntraces, dataExit
 
     # data.append(_row)
 

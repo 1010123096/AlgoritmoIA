@@ -3,10 +3,11 @@ import tkinter as tk
 from tkinter import filedialog
 
 root = tk.Tk()
-root.withdraw() # Oculta la ventana principal
+root.withdraw()  # Oculta la ventana principal
 
 # Abre una ventana de diálogo para buscar el archivo
-file_path = filedialog.askopenfilename(title="Seleccionar archivo", filetypes=[("Excel files", "*.xlsx")])
+file_path = filedialog.askopenfilename(
+    title="Seleccionar archivo", filetypes=[("Excel files", "*.xlsx")])
 
 # Verifica si se seleccionó un archivo
 if file_path:
@@ -18,7 +19,9 @@ else:
 
 ruta = file_path
 
-print(readData(ruta))
-
-
-
+entrada, salida, patron, matrizEntrada, matrizSalida = readData(ruta)
+print(entrada, salida, patron)
+print("////////////////////////////////////")
+print(matrizEntrada)
+print("////////////////////////////////////")
+print(matrizSalida)
