@@ -21,7 +21,7 @@ def guardarUmbrales(matriz,nombre):
   return rutaUmbrales
 
 def matrizPesos(entradas, salidas):
-    matrizPesos = np.random.uniform(low=-1, high=1, size=(entradas, salidas))
+    matrizPesos = np.random.uniform(low=-1, high=1, size=(salidas, entradas))
     matrizPesos = np.round(matrizPesos, decimals=2)
     return matrizPesos
 
