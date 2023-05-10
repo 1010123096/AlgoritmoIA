@@ -36,19 +36,19 @@ def readData(ruta):
     for row in range(1, dataframe.max_row):
         patrones += 1
 # Recorre el archivo sacando las entradas correspondientes y las almacena por patrones de entrada
-    for col in dataframe.iter_cols(1, entradas):
-        for row in range(1, dataframe.max_row):
+    for row in range(1, dataframe.max_row):
+        for col in dataframe.iter_cols(1, entradas):
             _rows.append(col[row].value)
             longitudDeRows = len(_rows)
-            if longitudDeRows == patrones:
+            if longitudDeRows == entradas:
                 dataEntraces.append(_rows)
                 _rows = []
 # Recorre el archivo sacando las salidas correspondientes y las almacena por patrones de salida
-    for col in dataframe.iter_cols(entradas+1, dataframe.max_column):
-        for row in range(1, dataframe.max_row):
+    for row in range(1, dataframe.max_row):
+        for col in dataframe.iter_cols(entradas+1, dataframe.max_column):
             _rows.append(col[row].value)
             longitudDeRows = len(_rows)
-            if longitudDeRows == patrones:
+            if longitudDeRows == salidas:
                 dataExit.append(_rows)
                 _rows = []
 
