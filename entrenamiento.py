@@ -58,11 +58,14 @@ for iteracion in range(0,numeroDeIteraciones):
             print(u[i])
             print("salida: ",i)
             Yr[i]=aux+u[i]
+            
             print(Yr[i])
             El[i] = s[i]-Yr[i]
             print("error por salida: ",El[i])
             #!agregar el valor absoluto 
-            Ep+=El[i]
+            if(El[i])<0:
+                El[i] = El[i]*-1
+                Ep+=El[i]
             print("error: por patron: ",Ep)
 
         Ep/=salidas
