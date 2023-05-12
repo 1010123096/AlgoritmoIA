@@ -1,22 +1,19 @@
 import numpy as np
 from pesosYUmbrales import matrizUmbrales,matrizPesos
 
-numeroDeIteraciones =int( input("Numero de iteraciones: \n"))
+# numeroDeIteraciones =int( input("Numero de iteraciones: \n"))
+numeroDeIteraciones=500
 errorMaximoPermitido =float(  input("Error maximo permitido: \n"))
 rataDeAprendizaje =float( input("Rata de aprendizaje: \n"))
-errorActual = .0
-patrones=1
+patrones=3 #**patrones falsos
 entradas=3
 salidas = 2
 
-# # while (errorMaximoPermitido<=errorActual):
-# for iteracion in range(1,numeroDeIteraciones+1):
-#     print("iteracion: ",iteracion)
-#     for patron in range(1,patrones+1):
-#         print("patron: ",patron)
 
-#**Patron falso
-a = [1,2,3]
+
+MatrizPatrones = [[1,2,3],[4,5,6],[7,8,9]]
+
+
 #**Salida Falsa
 s=[1,2]
 
@@ -30,28 +27,92 @@ w = matrizPesos(3,2)
 
 Yr = np.empty(salidas)
 El = np.empty(salidas)
-Ep=0
+EpTotal=np.empty(patrones)
 
-for i in range(0,salidas): 
-    aux=0
-    print("valor de i:" ,i)
-    for j in range(0,entradas):
-        print("valor de j:",j)
-        print("valor de a[j]:",a[j])
-        print("valor de b[i][j]:",w[i][j])
-        aux+=(a[j])*(w[i][j])
-        print(aux)
-    print("umbral : ",i)
-    print(u[i])
-    print("salida: ",i)
-    Yr[i]=aux-u[i]
-    print(Yr[i])
-    El[i] = s[i]-Yr[i]
-    print("error por salida: ",El[i])
-    Ep+=El[i]
-    print("error: por patron: ",Ep)
+for iteracion in range(0,numeroDeIteraciones):
+    print("iteracion: ",iteracion)
 
-Ep/=salidas
-print(Yr)
-print(El)
-print("error: por patron: ",Ep)
+    for patron in range(0,patrones):
+        
+        #**Patron falso
+        a = MatrizPatrones[patron]
+        print("patron: ",patron)
+        print(a)
+        print("\n")
+        print("\n")
+        print("\n")
+        print("\n")
+
+
+        Ep=0
+        for i in range(0,salidas): 
+            aux=0
+            print("valor de i:" ,i)
+            for j in range(0,entradas):
+                print("valor de j:",j)
+                print("valor de a[j]:",a[j])
+                print("valor de b[i][j]:",w[i][j])
+                aux+=(a[j])*(w[i][j])
+                print(aux)
+            print("umbral : ",i)
+            print(u[i])
+            print("salida: ",i)
+            Yr[i]=aux+u[i]
+            print(Yr[i])
+            El[i] = s[i]-Yr[i]
+            print("error por salida: ",El[i])
+            #!agregar el valor absoluto 
+            Ep+=El[i]
+            print("error: por patron: ",Ep)
+
+        Ep/=salidas
+
+        EpTotal[patron]=Ep
+        print(Yr)
+        print(El)
+        print("error: por patron: ",Ep)
+        
+
+
+        #!Segunda parte del algoritmo
+        #**Modificacion de PESOS Y UMBRALES
+
+        print("Modificacion de pesos y umbrales")
+
+        print("Pesos viejos")
+        print(w)
+        print("Umbrales viejos")
+        print(u)
+        for i in range(0,salidas): 
+            aux = w[i]
+            print("valor de i:" ,i)
+            for j in range(0,entradas):
+                print("valor de j:",j)
+                print(w[i][j])
+                print(rataDeAprendizaje)
+                print(float(El[i]))
+                print(float(a[j]))
+                print(aux)
+                aux[j] = rataDeAprendizaje*El[i]*a[j]
+                print(aux[j])
+                print(aux)
+            w[i]= aux
+            u[i]+=rataDeAprendizaje*El[i]*1
+                
+        print("Pesos Nuevos")
+        print(w)
+        print("Umbrales Nuevos")
+        print(u)
+
+
+    Erms = sum(EpTotal)/patrones
+    if(Erms <= errorMaximoPermitido):
+        print("\nError maximo alcanzado\n")
+        print("\n",Erms)
+        break
+    print("\n\n")
+    print("\n\n")
+    print("ERMS")
+    print(Erms)
+    print("\n\n")
+    print("\n\n")

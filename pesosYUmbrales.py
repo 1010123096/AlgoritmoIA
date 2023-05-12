@@ -46,19 +46,40 @@ def readDataExcel(ruta):
     
     return data
 
+print("Matriz De Umbrales")
+
+
+def readDataExcel2(ruta):    
+    # Define variable to load the dataframe
+    excel_dataframe = openpyxl.load_workbook(ruta)
+    # Define variable to read sheet
+    dataframe = excel_dataframe.active
+    print(dataframe)
+    data = []
+    data2 = []
+# Recorre el archibo de umbrales y los guarda en data y los imprime
+    # for col in dataframe.iter_cols(0, dataframe.max_column):
+    for row in range(0, dataframe.max_row):
+      data2=[]
+      # for row in range(0, dataframe.max_row):       
+      for col in dataframe.iter_cols(0, dataframe.max_column):       
+        data2.append(col[row].value)
+      data.append(data2) 
+    return data
+
 print("Matriz De peso")
 
-entradas = int(input("Entradas: \n"))
-salidas = int(input("Salidas: \n"))
-matrizp=matrizPesos(entradas, salidas)
-print(matrizp)
-print("Matriz De umbrales")
-matrizu =matrizUmbrales(salidas)
-print(matrizu)
-rutaPesos= guardarPesos(matrizp,"pesos")
-rutaUnmbrales= guardarUmbrales(matrizu,"Umbrales")
-print(rutaPesos)
-lecturaMatrizP=readDataExcel(rutaPesos)
-print(lecturaMatrizP)
+# entradas = int(input("Entradas: \n"))
+# salidas = int(input("Salidas: \n"))
+# matrizp=matrizPesos(entradas, salidas)
+# print(matrizp)
+# print("Matriz De umbrales")
+# matrizu =matrizUmbrales(salidas)
+# print(matrizu)
+# rutaPesos= guardarPesos(matrizp,"pesos")
+# rutaUnmbrales= guardarUmbrales(matrizu,"Umbrales")
+# print(rutaPesos)
+# lecturaMatrizP=readDataExcel(rutaPesos)
+# print(lecturaMatrizP)
 
 
